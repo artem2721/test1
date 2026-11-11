@@ -35,7 +35,7 @@ Epic cinematic Ukrainian folk, orchestral, 100 BPM, powerful female vocal, male 
 (Слово тримаєм!)
 Клопоти з доставки на себе знімаєм!
 Ціну фіксуєм, замовлення бронюєм —
-Найкращу ціну ми для вас гарантуєм!
+Кращу ціну ми вам даємо!
 (Хімагарасема — з нами надійно!)
 
 [Verse 2: drums and low strings, steady]
@@ -56,7 +56,7 @@ Epic cinematic Ukrainian folk, orchestral, 100 BPM, powerful female vocal, male 
 (Слово тримаєм!)
 Клопоти з доставки на себе знімаєм!
 Ціну фіксуєм, замовлення бронюєм —
-Найкращу ціну ми для вас гарантуєм!
+Кращу ціну ми вам даємо!
 (Хімагарасема — з нами надійно!)
 
 [Bridge: breakdown, only ethnic drums and male choir chant, slow crescendo]
@@ -70,7 +70,7 @@ Epic cinematic Ukrainian folk, orchestral, 100 BPM, powerful female vocal, male 
 (Слово тримаєм!)
 Клопоти з доставки на себе знімаєм!
 Ціну фіксуєм, замовлення бронюєм —
-Найкращу ціну ми для вас гарантуєм!
+Кращу ціну ми вам даємо!
 (Гей! Хімагарасема — з нами надійно!)
 (Гей! Хімагарасема — з нами надійно!)
 
