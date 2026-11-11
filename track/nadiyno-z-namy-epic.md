@@ -36,7 +36,7 @@ Epic cinematic Ukrainian folk, orchestral, 100 BPM, powerful female vocal, male 
 Клопоти з доставки на себе знімаєм!
 Замовлення ваше надійно бронюєм —
 Кращу ціну заздалегідь фіксуєм!
-(Хімагарасема — з нами надійно!)
+(Хімагросем — з нами надійно!)
 
 [Verse 2: drums and low strings, steady]
 Хай ринок гойдає, як вітер — колосся,
@@ -57,7 +57,7 @@ Epic cinematic Ukrainian folk, orchestral, 100 BPM, powerful female vocal, male 
 Клопоти з доставки на себе знімаєм!
 Замовлення ваше надійно бронюєм —
 Кращу ціну заздалегідь фіксуєм!
-(Хімагарасема — з нами надійно!)
+(Хімагросем — з нами надійно!)
 
 [Bridge: breakdown, only ethnic drums and male choir chant, slow crescendo]
 (Ви сієте — ми возимо!)
@@ -71,12 +71,12 @@ Epic cinematic Ukrainian folk, orchestral, 100 BPM, powerful female vocal, male 
 Клопоти з доставки на себе знімаєм!
 Замовлення ваше надійно бронюєм —
 Кращу ціну заздалегідь фіксуєм!
-(Гей! Хімагарасема — з нами надійно!)
-(Гей! Хімагарасема — з нами надійно!)
+(Гей! Хімагросем — з нами надійно!)
+(Гей! Хімагросем — з нами надійно!)
 
 [Outro: strings fade, solo flute, female vocal whisper]
 Один дзвінок — і все буде вчасно.
-Хімагарасема.
+Хімагросем.
 
 [End]
 ```
