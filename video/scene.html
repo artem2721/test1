@@ -1,0 +1,125 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1080" height="1920"></canvas>
+<script>
+const c=document.getElementById('c'),g=c.getContext('2d');
+const W=1080,H=1920,F='"DejaVu Sans", sans-serif';
+const cl=(x,a=0,b=1)=>Math.max(a,Math.min(b,x));
+const ease=x=>{x=cl(x);return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2};
+const back=x=>{x=cl(x);const s=1.7;return 1+(s+1)*Math.pow(x-1,3)+s*Math.pow(x-1,2)};
+function bg(t){
+  let s=g.createLinearGradient(0,0,0,H*.55);
+  s.addColorStop(0,'#5fb6f2');s.addColorStop(1,'#d9f0ff');
+  g.fillStyle=s;g.fillRect(0,0,W,H);
+  // sun
+  const sx=820,sy=300;
+  g.save();g.translate(sx,sy);g.rotate(t*.15);
+  for(let i=0;i<16;i++){g.rotate(Math.PI/8);g.fillStyle='rgba(255,236,150,.25)';
+    g.beginPath();g.moveTo(0,0);g.lineTo(700,-60);g.lineTo(700,60);g.fill();}
+  g.restore();
+  g.fillStyle='#ffe36e';g.beginPath();g.arc(sx,sy,110,0,7);g.fill();
+  // clouds
+  g.fillStyle='rgba(255,255,255,.9)';
+  [[120,220,1],[480,140,.8],[300,420,.7]].forEach(([x,y,k],i)=>{x=(x+t*25*(i+1))%(W+300)-150;
+    g.beginPath();g.arc(x,y,60*k,0,7);g.arc(x+60*k,y-25*k,70*k,0,7);g.arc(x+130*k,y,55*k,0,7);g.fill();});
+  // field
+  const hz=H*.5;
+  let f=g.createLinearGradient(0,hz,0,H);f.addColorStop(0,'#7cbf3a');f.addColorStop(1,'#2f7d1e');
+  g.fillStyle=f;g.fillRect(0,hz,W,H-hz);
+  g.strokeStyle='rgba(20,70,10,.45)';g.lineWidth=6;
+  for(let i=-14;i<=14;i++){g.beginPath();g.moveTo(W/2+i*18,hz);g.lineTo(W/2+i*260,H);g.stroke();}
+  // sprouts
+  for(let r=0;r<9;r++){const y=hz+40+r*r*14,sc=.3+r*.18;
+    for(let i=-6;i<=6;i++){const x=W/2+i*(18+ (y-hz)*.95)/1.05;
+      const sway=Math.sin(t*3+i+r)*4*sc;
+      g.strokeStyle='#bff27a';g.lineWidth=3*sc;
+      g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+sway,y-30*sc,x-14*sc+sway,y-46*sc);g.stroke();
+      g.beginPath();g.moveTo(x,y);g.quadraticCurveTo(x+sway,y-30*sc,x+16*sc+sway,y-40*sc);g.stroke();}}
+}
+// banner geometry
+const BX=110,BW=860,TOP=560,BH=1180;
+function bannerContent(t){
+  g.save();
+  let b=g.createLinearGradient(0,TOP,0,TOP+BH);b.addColorStop(0,'#1f8a3a');b.addColorStop(1,'#0f5a24');
+  g.fillStyle=b;g.fillRect(BX,TOP,BW,BH);
+  g.strokeStyle='#ffd23f';g.lineWidth=14;g.strokeRect(BX+30,TOP+30,BW-60,BH-60);
+  // logo: leaf + drop
+  const lx=W/2,ly=TOP+260;
+  g.fillStyle='#ffd23f';g.beginPath();g.arc(lx,ly,140,0,7);g.fill();
+  g.fillStyle='#1f8a3a';g.beginPath();
+  g.moveTo(lx,ly+95);g.bezierCurveTo(lx-120,ly+20,lx-80,ly-100,lx,ly-110);
+  g.bezierCurveTo(lx+80,ly-100,lx+120,ly+20,lx,ly+95);g.fill();
+  g.strokeStyle='#ffd23f';g.lineWidth=8;g.beginPath();g.moveTo(lx,ly+90);g.lineTo(lx,ly-85);g.stroke();
+  for(let k=0;k<3;k++){g.beginPath();g.moveTo(lx,ly+40-k*40);g.lineTo(lx-45,ly-k*40);g.moveTo(lx,ly+40-k*40);g.lineTo(lx+45,ly-k*40);g.stroke();}
+  g.textAlign='center';g.fillStyle='#fff';
+  g.font='bold 118px '+F;g.fillText('ХІМАГРОСЕМ',W/2,TOP+560,BW-90);
+  g.fillStyle='#ffd23f';g.font='bold 52px '+F;
+  ['Насіння','Засоби захисту рослин','Добрива'].forEach((s,i)=>g.fillText(s,W/2,TOP+700+i*90));
+  g.fillStyle='#fff';g.font='bold 64px '+F;g.fillText('Разом до врожаю!',W/2,TOP+1060);
+  g.restore();
+}
+function roll(y,ang){
+  const R=70;
+  g.save();
+  // ends
+  let rg=g.createLinearGradient(0,y-R,0,y+R);
+  rg.addColorStop(0,'#0c4a1c');rg.addColorStop(.35,'#2fae52');rg.addColorStop(.6,'#1f8a3a');rg.addColorStop(1,'#08361a');
+  g.fillStyle=rg;g.fillRect(BX-6,y-R,BW+12,2*R);
+  // spiral stripes moving
+  g.beginPath();g.rect(BX-6,y-R,BW+12,2*R);g.clip();
+  g.strokeStyle='rgba(255,210,63,.55)';g.lineWidth=6;
+  for(let k=0;k<6;k++){const yy=y-R+((k/6*2*R+ang*R)%(2*R));
+    g.beginPath();g.moveTo(BX,yy);g.lineTo(BX+BW,yy);g.stroke();}
+  g.restore();
+  // caps
+  g.fillStyle='#c9c9c9';
+  [BX-24,BX+BW+4].forEach(x=>{g.fillRect(x,y-R*.55,20,R*1.1);});
+  g.fillStyle='#8a5a2b';g.fillRect(BX-90,y-14,BW+180,28);
+  g.fillStyle='#6e4520';[BX-100,BX+BW+70].forEach(x=>{g.beginPath();g.arc(x+15,y,26,0,7);g.fill();});
+}
+function hands(y){
+  // simple gloved hands holding the rod
+  [BX-75,BX+BW+75].forEach(x=>{g.fillStyle='#ff8a1f';g.beginPath();g.ellipse(x,y,48,40,0,0,7);g.fill();
+    g.fillStyle='#e06d00';g.fillRect(x-30,y+30,60,140);});
+}
+function txt(s,y,size,a,color='#fff'){
+  g.save();g.globalAlpha=cl(a);g.textAlign='center';g.font='bold '+size+'px '+F;
+  g.lineWidth=14;g.strokeStyle='rgba(0,0,0,.6)';g.strokeText(s,W/2,y);g.fillStyle=color;g.fillText(s,W/2,y);g.restore();
+}
+window.render=function(t){
+  g.clearRect(0,0,W,H);bg(t);
+  // phases: 0-1.2 roll drops in, 1.5-5 unroll, 5+ reveal
+  const drop=back(t/1.2);
+  const u=ease((t-1.4)/3.4);
+  const rodTop=TOP-80;
+  const startY=-200+(rodTop+20+200)*drop;
+  // top rod
+  g.fillStyle='#8a5a2b';g.fillRect(BX-90,rodTop-14,BW+180,28);
+  if(t<1.4){roll(startY,t*2);hands(startY);}
+  else{
+    const ry=TOP+u*BH;
+    g.save();g.fillStyle='rgba(0,0,0,.25)';g.fillRect(BX+18,TOP+14,BW,ry-TOP);g.restore();
+    g.save();g.beginPath();g.rect(BX,TOP,BW,ry-TOP);g.clip();bannerContent(t);g.restore();
+    g.fillStyle='#8a5a2b';g.fillRect(BX-90,rodTop-14,BW+180,28);
+    g.fillStyle='#1f8a3a';g.fillRect(BX,rodTop,BW,TOP-rodTop);
+    roll(ry,(t-1.4)*3);hands(ry);
+    hands(rodTop);
+  }
+  // captions
+  txt('Розмотуємо…',300,92,cl((t-0.3)/0.4)*cl((4.6-t)/0.4));
+  // reveal flash + shine
+  if(t>4.8){const a=cl((t-4.8)/0.3)*cl((5.6-t)/0.6);
+    g.fillStyle='rgba(255,255,255,'+a*.7+')';g.fillRect(0,0,W,H);
+    const sx=BX-300+((t-5)/1.4)*(BW+600);
+    g.save();g.beginPath();g.rect(BX,TOP,BW,BH);g.clip();
+    let sh=g.createLinearGradient(sx-120,0,sx+120,0);sh.addColorStop(0,'rgba(255,255,255,0)');sh.addColorStop(.5,'rgba(255,255,255,.45)');sh.addColorStop(1,'rgba(255,255,255,0)');
+    g.fillStyle=sh;g.fillRect(BX,TOP,BW,BH);g.restore();
+    txt('Знайомтесь!',300,110,cl((t-5.2)/0.4),'#ffd23f');
+  }
+  // confetti
+  if(t>5){for(let i=0;i<120;i++){const tt=t-5,x=(i*97)%W,y=-50+((i*53)%400)+tt*(300+(i%7)*60);
+    g.save();g.translate(x+Math.sin(tt*4+i)*30,y);g.rotate(tt*5+i);
+    g.fillStyle=['#ffd23f','#ffffff','#7cdb4a','#ff8a1f'][i%4];g.fillRect(-10,-5,20,10);g.restore();}}
+};
+render(0);
+</script></body></html>
